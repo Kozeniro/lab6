@@ -5,13 +5,6 @@ pipeline {
         pollSCM('H/3 * * * *') 
 	}
 	
-    parameters {
-        choice(
-            name: 'ENV',
-            choices: ['dev', 'prod'],
-            description: 'Окружение для деплоя'
-        )
-    }
     
     stages {
         stage('Deploy') {
