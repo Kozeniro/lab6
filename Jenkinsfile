@@ -5,7 +5,7 @@ pipeline {
         choice(
             name: 'ENV',
             choices: ['dev', 'prod'],
-            description: 'Окружение для деплоя'
+            description: 'РћРєСЂСѓР¶РµРЅРёРµ РґР»СЏ РґРµРїР»РѕСЏ'
         )
     }
     
