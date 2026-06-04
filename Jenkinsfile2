@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    
+	triggers {
+        pollSCM('H/3 * * * *') 
+	}
+	
+    parameters {
+        choice(
+            name: 'ENV',
+            choices: ['dev', 'prod'],
+            description: 'Окружение для деплоя'
+        )
+    }
+    
+    stages {
+        stage('Deploy') {
+            steps {
+                echo "Deploying..."
+                
+                sshPublisher(
+					 publishers: [
+						 sshPublisherDesc(
+							 configName: "Prod",
+							 transfers: [
+								sshTransfer(sourceFiles: "main.py")
+							 ]
+						 )
+					 ]
+                )
+            }
+        }
+        
+        stage('Clean') {
+            steps {
+                cleanWs() 
+            }
+        }
+    }
+}
